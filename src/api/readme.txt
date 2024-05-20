@@ -1,1 +1,1 @@
-for api configuration
+FOR API CONFIGURATION 
