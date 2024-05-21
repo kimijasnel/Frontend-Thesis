@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react";
-import Charts from "./pages/Charts";
-import axios from "axios";
-import { Margin } from "@mui/icons-material";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import { CssVarsProvider } from "@mui/joy";
+import CssBaseline from "@mui/joy/CssBaseline";
+import Box from "@mui/joy/Box";
+
+// import Charts from "./pages/Charts";
 function App() {
-  const [data, setData] = useState<Data>({ training_data: [] }); // Set initial state with empty training_data
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("http://127.0.0.1:5000/api/get_data");
-      setData(response.data.training_data);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    // if (data > 0) data.map(([date, sales]: any) => console.log(date, sales));
-    if (data.length == 0) console.log(true);
-  }, [data]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return <div style={{ padding: "2rem" }}>{<Charts data={data} />}</div>;
+  return (
+    <CssVarsProvider disableTransitionOnChange>
+      <CssBaseline />
+      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+        <Sidebar />
+        <Header />
+      </Box>
+    </CssVarsProvider>
+  );
 }
 
 export default App;
